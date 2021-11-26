@@ -6,14 +6,14 @@ using UnityEngine;
 
 public class PlayerMovementV2 : MonoBehaviour
 {
-    public float defaultSpeed = 7.5f,runningSpeed = 11.5f,jumpForce = 8.0f,gravity = 20.0f;
+    public float defaultSpeed = 7.5f,runningSpeed = 11.5f,jumpForce = 8.0f,gravity = 7.5f;
 
     public Camera playerCamera;
     CharacterController characterController;
     Vector3 moveDirection = Vector3.zero;
 
     [HideInInspector]
-    public bool canMove = true;
+    public bool canMove = true; 
 
     void Start()
     {
@@ -34,7 +34,6 @@ public class PlayerMovementV2 : MonoBehaviour
         {
             moveDirection.y -= gravity * Time.deltaTime;
         }
-
         characterController.Move(moveDirection * Time.deltaTime);
     }
 } 
