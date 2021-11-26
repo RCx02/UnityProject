@@ -30,6 +30,16 @@ public class PlayerMovementV2 : MonoBehaviour
         float speedY = canMove ? (defaultSpeed) * Input.GetAxis("Horizontal") : 0;
         float movementDirectionY = moveDirection.y;
         moveDirection = (forward * speedX) + (right * speedY);
+
+        if (Input.GetButton("Jump") && canMove && characterController.isGrounded)
+        {
+            moveDirection.y = jumpForce;
+        }
+        else
+        {
+            moveDirection.y = movementDirectionY;
+        }
+
         if (!characterController.isGrounded)
         {
             moveDirection.y -= gravity * Time.deltaTime;
