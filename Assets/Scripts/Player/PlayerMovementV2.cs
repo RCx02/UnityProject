@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class PlayerMovementV2 : MonoBehaviour
 {
-    public float defaultSpeed = 7.5f,runningSpeed = 11.5f,jumpForce = 8.0f,gravity = 7.5f;
+    public float defaultSpeed = 7.5f,runningSpeed = 11.5f,jumpForce = 8.0f,gravity = 9.81f;
 
     public Camera playerCamera;
     CharacterController characterController;
