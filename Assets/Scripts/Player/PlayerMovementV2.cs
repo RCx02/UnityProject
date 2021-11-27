@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class PlayerMovementV2 : MonoBehaviour
 {
-    public float defaultSpeed = 7.5f,runningSpeed = 11.5f,jumpForce = 8.0f,gravity = 9.81f;
+    public float defaultSpeed = 7.5f,runningSpeed = 11.5f,jumpForce = 8.0f,gravity = 9.81f,lookSpeed = 2.0f,lookXLimit = 45.0f,rotationX = 0;
 
     public Camera playerCamera;
     CharacterController characterController;
@@ -26,8 +26,9 @@ public class PlayerMovementV2 : MonoBehaviour
     {
         Vector3 forward = transform.TransformDirection(Vector3.forward);
         Vector3 right = transform.TransformDirection(Vector3.right);
-        float speedX = canMove ? (defaultSpeed) * Input.GetAxis("Vertical") : 0;
-        float speedY = canMove ? (defaultSpeed) * Input.GetAxis("Horizontal") : 0;
+        bool isRunning = Input.GetKey(KeyCode.LeftShift);
+        float speedX = canMove ? (isRunning ? runningSpeed : defaultSpeed) * Input.GetAxis("Vertical") : 0;
+        float speedY = canMove ? (isRunning ? runningSpeed : defaultSpeed) * Input.GetAxis("Horizontal") : 0;
         float movementDirectionY = moveDirection.y;
         moveDirection = (forward * speedX) + (right * speedY);
 
@@ -45,5 +46,13 @@ public class PlayerMovementV2 : MonoBehaviour
             moveDirection.y -= gravity * Time.deltaTime;
         }
         characterController.Move(moveDirection * Time.deltaTime);
+
+        if (canMove)
+        {
+            rotationX += -Input.GetAxis("Mouse Y") * lookSpeed;
+            rotationX = Mathf.Clamp(rotationX, -lookXLimit, lookXLimit);
+            playerCamera.transform.localRotation = Quaternion.Euler(rotationX, 0, 0);
+            transform.rotation *= Quaternion.Euler(0, Input.GetAxis("Mouse X") * lookSpeed, 0);
+        }
     }
 } 
