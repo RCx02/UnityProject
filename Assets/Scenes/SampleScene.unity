@@ -429,6 +429,9 @@ MonoBehaviour:
   runningSpeed: 11.5
   jumpForce: 8
   gravity: 20
+  lookSpeed: 2
+  lookXLimit: 45
+  rotationX: 0
   playerCamera: {fileID: 1738648306}
   canMove: 1
 --- !u!143 &1376328116
